@@ -28,7 +28,7 @@
 
     // associative array in wp dev function
     $myArguments = array(
-      'post_type' => 'post'
+      'post_type' => 'wporg_product'
     );
 
     $myQuery = new WP_Query($myArguments);
@@ -37,6 +37,7 @@
       $myQuery -> the_post();
       echo "<br>";
       the_title();
+      the_content();
     }
 ?>
 
@@ -189,6 +190,7 @@
         </ol>
       </div>
     </section>
+
     <div style='display: flex;'>
         <?php 
             if(have_posts()):

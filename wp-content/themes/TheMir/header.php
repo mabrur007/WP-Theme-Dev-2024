@@ -43,6 +43,30 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
+          <?php
+
+            // Adding custom class to <li> elements
+            add_filter('nav_menu_css_class', function ($classes) {
+              $classes[] = 'nav-item';
+              return $classes;
+            }, 10, 4);
+
+            // Adding custom attributes or class to <a> elements
+            add_filter('nav_menu_link_attributes', function ($atts) {
+              $atts['class'] = 'nav-link';
+              return $atts;
+            }, 10, 4);
+
+            // WP basic function to show the menu on front-end 
+            wp_nav_menu(
+              array(
+                'theme_location' => 'top_menu',
+                'menu_class' => 'navbar-nav',
+                'container' => false
+              )
+            )
+          ?>
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
