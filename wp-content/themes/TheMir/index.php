@@ -28,7 +28,7 @@
 
     // associative array in wp dev function
     $myArguments = array(
-      'post_type' => 'wporg_product'
+      'post_type' => 'students'
     );
 
     $myQuery = new WP_Query($myArguments);
@@ -38,7 +38,21 @@
       echo "<br>";
       the_title();
       the_content();
+
+      // Display associated departments
+      $terms = get_the_terms(get_the_ID(), 'department');
+      if (!empty($terms) && !is_wp_error($terms)) {
+          echo '<p>Department: ';
+          $term_links = array_map(function($term) {
+              return '<a href="' . get_term_link($term) . '">' . esc_html($term -> name) . '</a>';
+          }, $terms);
+          echo implode(', ', $term_links);
+          echo '</p>';
+      } else {
+          echo '<p>No departments assigned.</p>';
+      }
     }
+    wp_reset_postdata();
 ?>
 
     <!-- slider section -->

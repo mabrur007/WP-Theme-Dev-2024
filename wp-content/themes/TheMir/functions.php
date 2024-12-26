@@ -21,14 +21,14 @@
     add_action('after_setup_theme', 'myThemeFunction');
 
 
-    // function for custom post type
-    
+    // function for custom post type for "Products"
     if(!function_exists('neogym_service_post')){
         function neogym_service_post(){
             register_post_type('wporg_product',
                 array(
                     'labels' => array(
-                        'name'          => __('Products', 'textdomain'),
+                        'name'          => __('All Products', 'textdomain'),
+                        'add_new_item'  => __( 'Add New Product', 'textdomain' ),
                         'singular_name' => __('Product', 'textdomain')
                     ),
                     'public'        => true,
@@ -38,5 +38,58 @@
         }
     }
     add_action('init', 'neogym_service_post');
+
+    // function for custom post type for "Students"
+    if(!function_exists('neogym_students')){
+        function neogym_students(){
+            register_post_type('students',
+                array(
+                    'labels' => array(
+                        'name'                  => __('Students', 'textdomain'),
+                        'singular_name'         => __('Student', 'textdomain'),
+                        'add_new_item'          => __( 'Add New Student', 'textdomain' ),
+                        'not_found'             => __( 'No students available.', 'textdomain' ),
+                        'not_found_in_trash'    => __( 'No student in trash.', 'textdomain' ),
+                        'set_featured_image'    => __( 'Set student image', 'textdomain' ),
+                    ),
+                    'public'        => true,
+                    'has_archive'   => true,
+                    'supports' => array('title', 'editor', 'thumbnail'),
+                    'taxonomies' => array('category'),
+                )
+            );
+        }
+    }
+    add_action('init', 'neogym_students');
+
+
+    // adding a custom taxonomy for 'neogym_students'
+    if(!function_exists('neogym_students_department')){
+        function neogym_students_department(){
+            $labels = array(
+                'name'              => _x( 'Departments', 'textdomain' ),
+                'singular_name'     => _x( 'Department', 'textdomain' ),
+                'search_items'      => __( 'Search Departments' ),
+                'all_items'         => __( 'All Departments' ),
+                'parent_item'       => __( 'Parent Department' ),
+                'parent_item_colon' => __( 'Parent Department:' ),
+                'edit_item'         => __( 'Edit Department' ),
+                'update_item'       => __( 'Update Department' ),
+                'add_new_item'      => __( 'Add New Department' ),
+                'new_item_name'     => __( 'New Department Name' ),
+                'menu_name'         => __( 'Department' ),
+            );
+            $args   = array(
+                'hierarchical'      => true, // make it hierarchical (like categories)
+                'labels'            => $labels,
+                'show_ui'           => true,
+                'show_admin_column' => true,
+                'query_var'         => true,
+                'rewrite'           => [ 'slug' => 'department' ],
+            );
+            register_taxonomy( 'department', [ 'students', 'wporg_product', 'post' ], $args );
+        }
+    }
+    add_action('init', 'neogym_students_department');
     
 ?>
