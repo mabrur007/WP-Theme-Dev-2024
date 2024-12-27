@@ -91,5 +91,46 @@
         }
     }
     add_action('init', 'neogym_students_department');
+
+
+    // adding a custom shortcode
+
+    if(!function_exists('my_custom_shortcode')){
+        function my_custom_shortcode(){
+            // this line represents the shortcode parameter
+            add_shortcode('myWord', 'myWordFunc');
+            if(!function_exists('myWordFunc')){
+                function myWordFunc(){
+                    return '<h4>This is my first shortcode!!</h4>';
+                }
+            }
+        }
+    }
+
+    add_action('init', 'my_custom_shortcode');
+
+    function my_custom_form_shortcode(){
+
+        add_shortcode('custom_form', 'custom_form_shortcode');
+        function custom_form_shortcode() {
+            
+            // Start output buffering
+            ob_start();
+            ?>
+            <form action="">
+                <label for="fname">First name:</label><br>
+                <input type="text" id="fname" name="fname" value="John"><br>
+                <label for="lname">Last name:</label><br>
+                <input type="text" id="lname" name="lname" value="Doe"><br><br>
+                <input type="submit" value="Submit">
+            </form>
+        
+            <?php
+            // Capture output and return it
+            return ob_get_clean();
+        }
+    }
+    
+    add_action('init', 'my_custom_form_shortcode')
     
 ?>

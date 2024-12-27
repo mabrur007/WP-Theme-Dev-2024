@@ -24,7 +24,7 @@
       "Model" => "Mustang",
       "Year" => 2002
     );
-    echo "Company of the car is " . $car["Company"] . " and year is " . $car["Year"];
+    // echo "Company of the car is " . $car["Company"] . " and year is " . $car["Year"];
 
     // associative array in wp dev function
     $myArguments = array(
