@@ -3,6 +3,8 @@
 
 <head>
   <!-- Basic -->
+   <?php wp_head(); ?>
+
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
@@ -36,7 +38,11 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
             <span>
-              Neogym
+              <!-- Neogym -->
+              <?php
+                $options = get_option( '_prefix_my_options' );
+                echo $options['opt-text-1'] . '<br>';
+              ?>
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

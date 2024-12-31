@@ -131,6 +131,13 @@
         }
     }
     
-    add_action('init', 'my_custom_form_shortcode')
+    add_action('init', 'my_custom_form_shortcode');
     
+
+
+
+    // codestar framework option enable here
+    require_once get_theme_file_path() .'/inc/codestar-framework/codestar-framework.php';
+
+    require_once get_theme_file_path() .'/inc/codestar-framework/samples/admin-options.php';
 ?>
